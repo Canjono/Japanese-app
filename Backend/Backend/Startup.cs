@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Backend.Middlewares;
+using Backend.Repositories.Dapper;
+using Backend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Backend
 {
@@ -23,7 +20,8 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddSingleton(Configuration);
+            services.AddTransient<IVocabularyRepository, VocabularyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +32,13 @@ namespace Backend
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseExceptionHandler("/Home/Error");
+
+            // GUI for testing GraphQL calls.
+            app.UseGraphiQl();
+
+            // GraphQL middleware.
+            app.UseGraphQl();
         }
     }
 }
