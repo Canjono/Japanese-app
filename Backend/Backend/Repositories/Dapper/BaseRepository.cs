@@ -11,8 +11,8 @@ namespace Backend.Repositories.Dapper
 
         public BaseRepository(IConfiguration configuration)
         {
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:Localhost");
-            //var connectionString = configuration.GetValue<string>("ConnectionStrings:Docker");
+            //var connectionString = configuration.GetValue<string>("ConnectionStrings:Localhost");
+            var connectionString = configuration.GetValue<string>("ConnectionStrings:Docker");
             Connection = new MySqlConnection(connectionString);
         }
     }

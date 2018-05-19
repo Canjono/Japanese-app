@@ -1,13 +1,10 @@
 ﻿using Backend.Middlewares;
-using Backend.Models;
 using Backend.Repositories.Dapper;
 using Backend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Backend
 {
