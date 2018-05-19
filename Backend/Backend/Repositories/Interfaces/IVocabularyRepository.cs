@@ -6,9 +6,8 @@ namespace Backend.Repositories.Interfaces
     public interface IVocabularyRepository
     {
         IEnumerable<Word> GetAllWords();
-        Word GetWord(int id);
-        void AddWord(Word word);
-        void DeleteWord(int id);
-        void UpdateWord(Word word);
+        bool AddWord(Word word);
+        bool DeleteWord(string id);
+        bool UpdateWord(Word word);
     }
 }

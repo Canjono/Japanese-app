@@ -76,7 +76,7 @@ namespace Backend.Middlewares
                 }
             }
 
-            MediaTypeHeaderValue.TryParse(request.ContentType, out MediaTypeHeaderValue contentType);
+            MediaTypeHeaderValue.TryParse(request.ContentType, out var contentType);
 
             GraphQlParameters parameters;
 
