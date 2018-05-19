@@ -7,3 +7,17 @@ services:
       - ./frontend/src:/app/src:ro
     ports:
       - "8080:8080"
+
+  backend:
+    build: ./Backend/Backend
+    ports:
+      - "21000:21000"
+
+  database:
+    image: "mariadb"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
