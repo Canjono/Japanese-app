@@ -30,7 +30,7 @@ namespace Backend.Repositories.Dapper
             using (var dc = Connection)
             {
                 dc.Open();
-                var words = dc.Query<Word>("get_all_words",
+                var words = dc.Query<Word>("word_all_get",
                     new { userId = 2 },
                     commandType: CommandType.StoredProcedure).ToList();
 

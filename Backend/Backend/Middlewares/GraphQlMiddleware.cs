@@ -26,8 +26,6 @@ namespace Backend.Middlewares
 
         public async Task Invoke(HttpContext httpContext)
         {
-            var sent = false;
-
             if (httpContext.Request.Path.StartsWithSegments("/graphql"))
             {
                 var request = httpContext.Request;
@@ -42,7 +40,7 @@ namespace Backend.Middlewares
                     return;
                 }
 
-                GraphQlParameters parameters = await GetParametersAsync(request);
+                var parameters = await GetParametersAsync(request);
 
                 var schema = new Schema { Query = new VocabularyQuery(_vocabularyRepository) };
 
@@ -57,11 +55,8 @@ namespace Backend.Middlewares
                 CheckForErrors(result);
 
                 await WriteResult(httpContext, result);
-
-                sent = true;
             }
-
-            if (!sent)
+            else
             {
                 await _next(httpContext);
             }
