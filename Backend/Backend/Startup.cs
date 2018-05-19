@@ -22,6 +22,7 @@ namespace Backend
         {
             services.AddSingleton(Configuration);
             services.AddTransient<IVocabularyRepository, VocabularyRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

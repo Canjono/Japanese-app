@@ -5,20 +5,15 @@ using System.Data;
 
 namespace Backend.Repositories.Dapper
 {
-    public class BaseRepository : IDisposable
+    public class BaseRepository
     {
         protected IDbConnection Connection;
 
         public BaseRepository(IConfiguration configuration)
         {
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:Localhost");
-            //var connectionString = configuration.GetValue<string>("ConnectionStrings:Docker");
+            //var connectionString = configuration.GetValue<string>("ConnectionStrings:Localhost");
+            var connectionString = configuration.GetValue<string>("ConnectionStrings:Docker");
             Connection = new MySqlConnection(connectionString);
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }
