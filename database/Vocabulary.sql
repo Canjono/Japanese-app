@@ -26,14 +26,16 @@ CREATE TABLE IF NOT EXISTS `audit_trail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table Vocabulary.audit_trail: ~6 rows (approximately)
+-- Dumping data for table Vocabulary.audit_trail: ~8 rows (approximately)
 /*!40000 ALTER TABLE `audit_trail` DISABLE KEYS */;
 REPLACE INTO `audit_trail` (`id`, `message`, `created_time`) VALUES
 	(_binary 0x1E4AD8D75AE211E8BC680242AC110002, 'Word akai was created', '2018-05-18 21:26:25'),
 	(_binary 0x36AE96355AE111E8BC680242AC110002, '0', '2018-05-18 21:19:56'),
 	(_binary 0x3AD640805AE211E8BC680242AC110002, 'Word ohoy was created', '2018-05-18 21:27:13'),
+	(_binary 0x7988A18D5B9B11E884B40242AC110002, 'Word korosu was created', '2018-05-19 19:33:15'),
 	(_binary 0x960D09115AE211E8BC680242AC110002, 'User gamanno was created', '2018-05-18 21:29:46'),
 	(_binary 0xAD2D0EFD5AE111E8BC680242AC110002, 'Word was created', '2018-05-18 21:23:15'),
+	(_binary 0xD93A49755B9011E884B40242AC110002, 'Word asd was updated', '2018-05-19 18:17:11'),
 	(_binary 0xDF40998D5AE211E8BC680242AC110002, 'User newguy was created', '2018-05-18 21:31:48');
 /*!40000 ALTER TABLE `audit_trail` ENABLE KEYS */;
 
@@ -134,14 +136,15 @@ CREATE TABLE IF NOT EXISTS `words` (
   KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table Vocabulary.words: ~4 rows (approximately)
+-- Dumping data for table Vocabulary.words: ~6 rows (approximately)
 /*!40000 ALTER TABLE `words` DISABLE KEYS */;
 REPLACE INTO `words` (`id`, `name`, `translation`, `grammar`, `story`, `created_time`, `updated_time`, `enabled`) VALUES
-	(_binary 0x1E4A0DEF5AE211E8BC680242AC110002, 'akai', 'bright', 'adjective', 'some story thing', '2018-05-18 21:26:25', NULL, 1),
-	(_binary 0x36AD61C35AE111E8BC680242AC110002, 'akarui', 'bright', 'adjective', 'some story thing', '2018-05-18 21:19:56', NULL, 1),
+	(_binary 0x1E4A0DEF5AE211E8BC680242AC110002, 'asd', 'hf', 'sdf', 'sdf sdf fd ', '2018-05-18 21:26:25', '2018-05-19 18:17:11', 0),
+	(_binary 0x36AD61C35AE111E8BC680242AC110002, 'konnichiwa', 'good day', 'other', 'Naruto says konnichiwa', '2018-05-18 21:19:56', '2018-05-19 19:46:21', 1),
 	(_binary 0x3AD524915AE211E8BC680242AC110002, 'ohoy', 'bright', 'adjective', 'some story thing', '2018-05-18 21:27:13', NULL, 1),
+	(_binary 0x798672B25B9B11E884B40242AC110002, 'korosu', 'kill', 'verb', 'Gaara says korosu', '2018-05-19 19:33:15', NULL, 1),
 	(_binary 0x8EBB41895AE111E8BC680242AC110002, 'akarui', 'bright', 'adjective', 'some story thing', '2018-05-18 21:22:24', NULL, 1),
-	(_binary 0xAD2C41315AE111E8BC680242AC110002, 'akarui', 'bright', 'adjective', 'some story thing', '2018-05-18 21:23:15', NULL, 1);
+	(_binary 0xAD2C41315AE111E8BC680242AC110002, 'akarui', 'bright', 'adjective', 'some story thing', '2018-05-18 21:23:15', NULL, 0);
 /*!40000 ALTER TABLE `words` ENABLE KEYS */;
 
 -- Dumping structure for table Vocabulary.word_to_room
@@ -178,24 +181,6 @@ CREATE TABLE IF NOT EXISTS `word_to_user` (
 /*!40000 ALTER TABLE `word_to_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `word_to_user` ENABLE KEYS */;
 
--- Dumping structure for procedure Vocabulary.Test
-DROP PROCEDURE IF EXISTS `Test`;
-DELIMITER //
-CREATE DEFINER=`root`@`%` PROCEDURE `Test`(
-	IN `userId` VARCHAR(50)
-)
-BEGIN
-	declare wrong varchar(36);
-	set wrong = 'wrong';
-	
-	if (userId IS NOT NULL) then
-		select userId;
-	else
-		select wrong;
-	end if;
-END//
-DELIMITER ;
-
 -- Dumping structure for procedure Vocabulary.user_create
 DROP PROCEDURE IF EXISTS `user_create`;
 DELIMITER //
@@ -205,15 +190,17 @@ CREATE DEFINER=`root`@`%` PROCEDURE `user_create`(
 
 
 
+
 )
     COMMENT 'Create a new user'
 BEGIN
-	INSERT INTO users VALUES(uuid_to_bin(uuid()), nickname, password, true, now());
+	INSERT INTO users
+		VALUES(uuid_to_bin(UUID()), nickname, password, true, NOW());
 	
-	SET @message = concat('User ', nickname, ' was created');
+	SET @message = CONCAT('User ', nickname, ' was created');
 	
 	INSERT INTO audit_trail
-		VALUES(uuid_to_bin(uuid()), @message, now());
+		VALUES(uuid_to_bin(UUID()), @message, NOW());
 END//
 DELIMITER ;
 
@@ -224,11 +211,12 @@ CREATE DEFINER=`root`@`%` PROCEDURE `user_get`(
 	IN `nickname` VARCHAR(50)
 
 
+
 )
 BEGIN
-	select bin_to_uuid(u.id) as id, u.nickname
-		from users as u 
-	where u.nickname = nickname and enabled = 1;
+	SELECT bin_to_uuid(u.id) AS id, u.nickname
+		FROM users AS u 
+	WHERE u.nickname = nickname AND enabled = 1;
 END//
 DELIMITER ;
 
@@ -237,16 +225,21 @@ DROP PROCEDURE IF EXISTS `word_all_get`;
 DELIMITER //
 CREATE DEFINER=`root`@`%` PROCEDURE `word_all_get`(
 	IN `userId` VARCHAR(50)
+
+
 )
 BEGIN
-	if (userId IS NOT NULL) then
-		select *
-			from words as w
-				inner join word_to_user as wu on wu.word_id = w.id
-				inner join users as u on u.id = wu.user_id;
-	else
-		select * from words;
-	end if;
+	IF (userId IS NOT NULL and userId != '') THEN
+		SELECT bin_to_uuid(w.id) as id, w.name, w.translation, w.grammar, w.story, w.created_time, w.updated_time
+			FROM words AS w
+				INNER JOIN word_to_user AS wu ON wu.word_id = w.id
+				INNER JOIN users AS u ON u.id = wu.user_id
+			WHERE w.enabled = 1;
+	ELSE
+		SELECT bin_to_uuid(id) as id, name, translation, grammar, story, created_time, updated_time
+			FROM words
+			WHERE enabled = 1;
+	END IF;
 END//
 DELIMITER ;
 
@@ -254,7 +247,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS `word_create`;
 DELIMITER //
 CREATE DEFINER=`root`@`%` PROCEDURE `word_create`(
-	IN `word` VARCHAR(50),
+	IN `name` VARCHAR(50),
 	IN `translation` VARCHAR(50),
 	IN `grammar` VARCHAR(50),
 	IN `story` VARCHAR(50)
@@ -266,25 +259,69 @@ CREATE DEFINER=`root`@`%` PROCEDURE `word_create`(
 ,
 	IN `userId` VARCHAR(50)
 
+
+
+
 )
     COMMENT 'Create a new word'
 BEGIN
 	-- Insert word.
-	set @wordId = uuid_to_bin(uuid());
+	SET @wordId = uuid_to_bin(UUID());
 	
-	insert into words
-		values(@wordId, word, translation, grammar, story, now(), null, 1);
+	INSERT INTO words
+		VALUES(@wordId, name, translation, grammar, story, NOW(), null, 1);
 	
 	-- Connect to user.
-	if (userId IS NOT NULL) then
-		insert into word_to_user values(uuid_to_bin(uuid()), uuid_to_bin(userId), @wordId);
-	end if;
+	IF (userId IS NOT NULL and userId != '') THEN
+		INSERT INTO word_to_user
+			VALUES(uuid_to_bin(UUID()), uuid_to_bin(userId), @wordId);
+	END IF;
 	
 	-- Audit trail.
-	set @message = concat('Word ', word, ' was created');
+	SET @message = CONCAT('Word ', name, ' was created');
 	
-	insert into audit_trail
-		values(uuid_to_bin(uuid()), @message, now());
+	INSERT INTO audit_trail
+		VALUES(uuid_to_bin(UUID()), @message, NOW());
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure Vocabulary.word_delete
+DROP PROCEDURE IF EXISTS `word_delete`;
+DELIMITER //
+CREATE DEFINER=`root`@`%` PROCEDURE `word_delete`(
+	IN `wordId` VARCHAR(50)
+)
+BEGIN
+	UPDATE words
+		SET enabled = 0
+		WHERE id = uuid_to_bin(wordId);
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure Vocabulary.word_update
+DROP PROCEDURE IF EXISTS `word_update`;
+DELIMITER //
+CREATE DEFINER=`root`@`%` PROCEDURE `word_update`(
+	IN `wordId` VARCHAR(50),
+	IN `name` VARCHAR(50),
+	IN `translation` VARCHAR(50),
+	IN `grammar` VARCHAR(50),
+	IN `story` VARCHAR(50)
+
+
+)
+BEGIN
+	-- Update word.
+	
+	UPDATE words
+		SET name = name, translation = translation, grammar = grammar, story = story, updated_time = NOW()
+		WHERE id = uuid_to_bin(wordId);
+	
+	-- Audit trail.
+	SET @message = CONCAT('Word ', name, ' was updated');
+	
+	INSERT INTO audit_trail
+		VALUES(uuid_to_bin(UUID()), @message, NOW());
 END//
 DELIMITER ;
 
