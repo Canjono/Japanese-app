@@ -12,6 +12,11 @@ namespace Backend.Repositories.Models
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
 
+        public Word()
+        {
+
+        }
+
         public Word(string name, string translation, string grammar, string story)
         {
             Name = name;

@@ -11,7 +11,7 @@ services:
   backend:
     build: ./Backend/Backend
     ports:
-      - "21000:21000"
+      - "21000:80"
 
   database:
     image: "mariadb"
