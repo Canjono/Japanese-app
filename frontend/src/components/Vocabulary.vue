@@ -4,7 +4,7 @@
     <h3>Number of words: {{ countWords }}</h3>
     <ul>
         <li v-for="(word, index) in words" v-bind:key="index">
-            <Word v-bind:id="word.id" v-bind:name="word.name" v-bind:translation="word.translation" v-bind:grammar="word.grammar" v-bind:story="word.story"></Word>
+            <Word v-bind:word="word"></Word>
         </li>
     </ul>
   </div>

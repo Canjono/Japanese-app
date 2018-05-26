@@ -1,9 +1,9 @@
 <template>
   <div class="word">
-    <p>{{ name }}</p>
-    <p>{{ translation }}</p>
-    <p>{{ grammar }}</p>
-    <p>{{ story }}</p>
+    <p>{{ word.name }}</p>
+    <p>{{ word.translation }}</p>
+    <p>{{ word.grammar }}</p>
+    <p>{{ word.story }}</p>
   </div>
 </template>
 
@@ -11,11 +11,7 @@
 export default {
   name: 'Word',
   props: {
-    id: String,
-    name: String,
-    translation: String,
-    grammar: String,
-    story: String
+    word: Object
   }
 }
 </script>
