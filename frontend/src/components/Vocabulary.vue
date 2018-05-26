@@ -4,7 +4,7 @@
     <h3>Number of words: {{ countWords }}</h3>
     <ul>
         <li v-for="(word, index) in words" v-bind:key="index">
-            {{ word }}
+            <Word v-bind:id="word.id" v-bind:name="word.name" v-bind:translation="word.translation" v-bind:grammar="word.grammar" v-bind:story="word.story"></Word>
         </li>
     </ul>
   </div>
@@ -12,6 +12,7 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import Word from '@/components/Word.vue'
 
 export default {
   name: 'Vocabulary',
@@ -19,6 +20,9 @@ export default {
     return {
       title: 'Vocabulary'
     }
+  },
+  components: {
+    Word
   },
   computed: {
     ...mapState([

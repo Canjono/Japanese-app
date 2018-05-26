@@ -10,10 +10,12 @@
 <script>
 export default {
   name: 'Word',
-  data () {
-    return {
-      msg: 'Message'
-    }
+  props: {
+    id: String,
+    name: String,
+    translation: String,
+    grammar: String,
+    story: String
   }
 }
 </script>
