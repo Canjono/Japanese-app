@@ -22,6 +22,8 @@ export default new Vuex.Store({
     },
     GET_WORDS: (state, words) => {
       state.words = words
+    },
+    UPDATE_WORD: (state, word) => {
     }
   },
   actions: {
@@ -36,6 +38,9 @@ export default new Vuex.Store({
           resolve()
         }, 1000)
       })
+    },
+    updateWord: (context, word) => {
+      context.commit('UPDATE_WORD', word)
     }
   }
 })
