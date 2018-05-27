@@ -28,15 +28,15 @@
 
 <script>
 export default {
-  name: 'Word',
-  props: {
-    word: Object
-  },
-  methods: {
-    onSubmit (evt) {
-      evt.preventDefault()
-      alert(`${this.word.name} was updated`)
+    name: 'Word',
+    props: {
+        word: Object
+    },
+    methods: {
+        onSubmit(evt) {
+            evt.preventDefault()
+            alert(`${this.word.name} was updated`)
+        }
     }
-  }
 }
 </script>

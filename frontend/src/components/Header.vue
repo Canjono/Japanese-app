@@ -45,8 +45,8 @@
 import { mapState } from 'vuex'
 
 export default {
-  computed: {
-    ...mapState(['appTitle'])
-  }
+    computed: {
+        ...mapState(['appTitle'])
+    }
 }
 </script>
