@@ -11,5 +11,5 @@ COPY . /app
 
 EXPOSE 8080
 
-RUN yarn run lint --fix
+RUN yarn run lint
 CMD ["yarn", "run", "dev"]

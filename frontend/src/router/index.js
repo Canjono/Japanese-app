@@ -5,11 +5,11 @@ import Vocabulary from '@/components/Vocabulary'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Vocabulary',
-      component: Vocabulary
-    }
-  ]
+    routes: [
+        {
+            path: '/',
+            name: 'Vocabulary',
+            component: Vocabulary
+        }
+    ]
 })
