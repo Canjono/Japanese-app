@@ -4,43 +4,60 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    words: [
-      { id: '12345', name: 'Amai', translation: 'Sweet', grammar: 'Adjective', story: 'A story about sweet and amai' },
-      { id: '34567', name: 'Kuruma', translation: 'Car', grammar: 'Noun', story: 'A story about kuruma and car' },
-      { id: '56789', name: 'Korosu', translation: 'Kill', grammar: 'Verb', story: 'A story about korosu and kill' }
-    ]
-  },
-  getters: {
-    countWords: state => {
-      return state.words.length
+    state: {
+        words: [
+            {
+                id: '12345',
+                name: 'Amai',
+                translation: 'Sweet',
+                grammar: 'Adjective',
+                story: 'A story about sweet and amai'
+            },
+            {
+                id: '34567',
+                name: 'Kuruma',
+                translation: 'Car',
+                grammar: 'Noun',
+                story: 'A story about kuruma and car'
+            },
+            {
+                id: '56789',
+                name: 'Korosu',
+                translation: 'Kill',
+                grammar: 'Verb',
+                story: 'A story about korosu and kill'
+            }
+        ]
+    },
+    getters: {
+        countWords: state => {
+            return state.words.length
+        }
+    },
+    mutations: {
+        ADD_WORD: (state, word) => {
+            state.words.push(word)
+        },
+        GET_WORDS: (state, words) => {
+            state.words = words
+        },
+        UPDATE_WORD: (state, word) => {}
+    },
+    actions: {
+        addWord: (context, word) => {
+            context.commit('ADD_WORD', word)
+        },
+        // Example of how to use a promise when getting words.
+        getWords({ commit }) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    commit('GET_WORDS')
+                    resolve()
+                }, 1000)
+            })
+        },
+        updateWord: (context, word) => {
+            context.commit('UPDATE_WORD', word)
+        }
     }
-  },
-  mutations: {
-    ADD_WORD: (state, word) => {
-      state.words.push(word)
-    },
-    GET_WORDS: (state, words) => {
-      state.words = words
-    },
-    UPDATE_WORD: (state, word) => {
-    }
-  },
-  actions: {
-    addWord: (context, word) => {
-      context.commit('ADD_WORD', word)
-    },
-    // Example of how to use a promise when getting words.
-    getWords ({ commit }) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          commit('GET_WORDS')
-          resolve()
-        }, 1000)
-      })
-    },
-    updateWord: (context, word) => {
-      context.commit('UPDATE_WORD', word)
-    }
-  }
 })
