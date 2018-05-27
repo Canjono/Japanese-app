@@ -7,6 +7,7 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import apolloProvider from './ApolloProvider'
 
 Vue.config.productionTip = false
 
@@ -18,5 +19,6 @@ new Vue({
     router,
     store,
     components: { App },
-    template: '<App/>'
+    template: '<App/>',
+    provide: apolloProvider.provide()
 })
