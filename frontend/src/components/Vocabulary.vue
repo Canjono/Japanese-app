@@ -1,5 +1,6 @@
 <template>
   <div class="Vocabulary">
+    <b-img width="320" height="207" center src="../assets/logo.png" alt="center image" />
     <h1>{{ title }}</h1>
     <h3>Number of words: {{ countWords }}</h3>
     <ul>
@@ -25,20 +26,12 @@ export default {
     Word
   },
   computed: {
-    ...mapState([
-      'words'
-    ]),
-    ...mapGetters([
-      'countWords'
-    ])
+    ...mapState(['words']),
+    ...mapGetters(['countWords'])
   },
   methods: {
-    ...mapMutations([
-      'ADD_WORD'
-    ]),
-    ...mapActions([
-      'addWord'
-    ]),
+    ...mapMutations(['ADD_WORD']),
+    ...mapActions(['addWord']),
     addNewWord: function (word) {
       this.addWord(word)
     }
@@ -48,7 +41,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
