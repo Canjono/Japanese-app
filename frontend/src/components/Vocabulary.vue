@@ -2,12 +2,13 @@
   <div class="Vocabulary">
     <b-img width="320" height="207" center src="../assets/logo.png" alt="center image" />
     <h1>{{ title }}</h1>
-    <h3>Number of words: {{ countWords }}</h3>
-    <ul>
-        <li v-for="(word, index) in words" v-bind:key="index">
-            <Word v-bind:word="word"></Word>
-        </li>
-    </ul>
+    <b-container class="word-container">
+        <b-row>
+            <b-col sm="6" md="4" v-for="(word, index) in words" v-bind:key="index">
+                <Word v-bind:word="word"></Word>
+            </b-col>
+        </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -19,7 +20,7 @@ export default {
     name: 'Vocabulary',
     data() {
         return {
-            title: 'uuu'
+            title: 'Vocabulary'
         }
     },
     components: {

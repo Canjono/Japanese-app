@@ -21,7 +21,25 @@
                       placeholder="Enter translation">
         </b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Update</b-button>
+      <b-form-group id="grammarInputGroup"
+                    label="Grammar:"
+                    label-for="grammarInput">
+        <b-form-input id="grammarInput"
+                      type="text"
+                      v-model="word.grammar"
+                      placeholder="Enter grammar">
+        </b-form-input>
+      </b-form-group>
+      <b-form-group id="storyInputGroup"
+                    label="Story:"
+                    label-for="storyInput">
+        <b-form-textarea id="storyInput"
+                      v-model="word.story"
+                      placeholder="Enter story"
+                      :rows="5">
+        </b-form-textarea>
+      </b-form-group>
+      <b-button type="submit" variant="secondary">Update</b-button>
     </b-form>
   </div>
 </template>
