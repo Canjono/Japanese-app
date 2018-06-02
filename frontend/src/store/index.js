@@ -44,7 +44,13 @@ export default new Vuex.Store({
         GET_WORDS: (state, words) => {
             state.words = words
         },
-        UPDATE_WORD: (state, word) => {}
+        UPDATE_WORD: (state, word) => {},
+        UPDATE_WORD_PROPERTY: (state, word) => {
+            const words = state.words.map(x => {
+                return x.id === word.id ? { ...word } : x
+            })
+            state.words = words
+        }
     },
     actions: {
         addWord: (context, word) => {
@@ -72,15 +78,12 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.error(err)
                 })
-            // return new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //         commit('GET_WORDS')
-            //         resolve()
-            //     }, 1000)
-            // })
         },
         updateWord: (context, word) => {
             context.commit('UPDATE_WORD', word)
+        },
+        updateWordProperty: (context, word) => {
+            context.commit('UPDATE_WORD_PROPERTY', word)
         }
     }
 })

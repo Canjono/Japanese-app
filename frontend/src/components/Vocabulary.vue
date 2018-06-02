@@ -1,7 +1,7 @@
 <template>
   <div class="Vocabulary">
     <b-img width="320" height="207" center src="../assets/logo.png" alt="center image" />
-    <button v-on:click="getWords">Add 1</button>
+    <button v-on:click="getWords">Get all words</button>
     <h1>{{ title }}</h1>
     <b-container class="word-container">
         <b-row>
