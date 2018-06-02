@@ -20,6 +20,8 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddSingleton(Configuration);
             services.AddTransient<IVocabularyRepository, VocabularyRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -32,6 +34,12 @@ namespace Backend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseExceptionHandler("/Home/Error");
 

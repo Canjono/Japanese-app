@@ -31,14 +31,17 @@ namespace Backend.Middlewares
                 var request = httpContext.Request;
                 var response = httpContext.Response;
 
-                // GraphQL HTTP only supports GET and POST methods.
+                //GraphQL HTTP only supports GET and POST methods.
                 if (request.Method != "GET" && request.Method != "POST")
                 {
+                    Console.WriteLine("GraphQL HTTP method was not allowed. Use GET or POST.");
                     response.Headers.Add("Allow", "GET, POST");
                     response.StatusCode = 405;
 
                     return;
                 }
+
+                Console.WriteLine("A GraphQL request was registered.");
 
                 var parameters = await GetParametersAsync(request);
 
