@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import apolloClient from '@/ApolloClient'
+import gql from 'graphql-tag'
 
 Vue.use(Vuex)
 
@@ -49,13 +51,33 @@ export default new Vuex.Store({
             context.commit('ADD_WORD', word)
         },
         // Example of how to use a promise when getting words.
-        getWords({ commit }) {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    commit('GET_WORDS')
-                    resolve()
-                }, 1000)
-            })
+        getWords(context) {
+            apolloClient
+                .query({
+                    query: gql`
+                        {
+                            getWords {
+                                id
+                                name
+                                translation
+                                grammar
+                                story
+                            }
+                        }
+                    `
+                })
+                .then(result => {
+                    context.commit('GET_WORDS', result.data.getWords)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+            // return new Promise((resolve, reject) => {
+            //     setTimeout(() => {
+            //         commit('GET_WORDS')
+            //         resolve()
+            //     }, 1000)
+            // })
         },
         updateWord: (context, word) => {
             context.commit('UPDATE_WORD', word)

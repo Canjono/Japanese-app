@@ -4,7 +4,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const httpLink = new HttpLink({
     // You should use an absolute URL here
-    uri: 'http://localhost:3020/graphql'
+    // uri: 'japaneseapp_backend/graphql'
+    uri: 'http://0.0.0.0:21000/graphql/'
 })
 
 // Create the apollo client
