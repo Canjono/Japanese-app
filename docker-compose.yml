@@ -9,9 +9,9 @@ services:
       - "8080:8080"
 
   backend:
-    build: ./Backend/Backend
+    build: ./backend
     ports:
-      - "21000:80"
+      - "4000:8080"
 
   database:
     image: "mariadb"
