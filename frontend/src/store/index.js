@@ -62,7 +62,7 @@ export default new Vuex.Store({
                 .query({
                     query: gql`
                         {
-                            getWords {
+                            words {
                                 id
                                 name
                                 translation
