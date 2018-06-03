@@ -2,7 +2,6 @@ version: '3'
 
 services:
   frontend:
-    container_name: japaneseapp_frontend
     build: ./frontend
     volumes:
       - ./frontend/src:/app/src:ro
@@ -10,13 +9,11 @@ services:
       - "8080:8080"
 
   backend:
-    container_name: japaneseapp_backend
     build: ./Backend/Backend
     ports:
       - "21000:80"
 
   database:
-    container_name: japaneseapp_database
     image: "mariadb"
     ports:
       - "3306:3306"
