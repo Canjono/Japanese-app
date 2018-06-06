@@ -26,7 +26,7 @@ const wordsData = [
         story: 'To kill a zombie you have to CRUSH it'
     },
     {
-        id: '22222',
+        id: '343',
         name: 'Amai',
         translation: 'Sweet',
         grammar: 'Adjective',
@@ -61,6 +61,6 @@ const port = 3000
 
 app.listen(port, () =>
     console.log(
-        `Express GraphQL Server Now Running On localhost:${port}/graphql`
+        `Canjono GraphQL Server Now Running On localhost:${port}/graphql`
     )
 )
