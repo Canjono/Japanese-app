@@ -15,6 +15,9 @@ services:
     ports:
       - "3000:3000"
       - "9229:9229"
+    restart: on-failure
+    depends_on:
+      - database
 
   database:
     image: "mariadb"
