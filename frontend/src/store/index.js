@@ -73,7 +73,7 @@ export default new Vuex.Store({
                     `
                 })
                 .then(result => {
-                    context.commit('GET_WORDS', result.data.getWords)
+                    context.commit('GET_WORDS', result.data.words)
                 })
                 .catch(err => {
                     console.error(err)

@@ -1,6 +1,7 @@
 import express from 'express'
 import express_graphql from 'express-graphql'
 import { buildSchema } from 'graphql'
+import cors from 'cors'
 
 // GraphQL schema.
 const schema = buildSchema(`
@@ -45,6 +46,8 @@ const root = {
 // Create an express server and a GraphQL endpoint.
 const app = express()
 
+app.use(cors())
+
 app.use(
     '/graphql',
     express_graphql({
@@ -54,8 +57,10 @@ app.use(
     })
 )
 
-app.listen(3000, () =>
+const port = 3000
+
+app.listen(port, () =>
     console.log(
-        'Express GraphQL Server Now Running On localhost:3000/graphql'
+        `Express GraphQL Server Now Running On localhost:${port}/graphql`
     )
 )
