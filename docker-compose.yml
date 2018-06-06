@@ -10,6 +10,8 @@ services:
 
   backend:
     build: ./backend
+    volumes:
+      - ./backend/server.js:/app/server.js:ro
     ports:
       - "3000:3000"
       - "9229:9229"
