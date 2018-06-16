@@ -20,12 +20,8 @@ services:
       - database
 
   database:
-    image: "mariadb"
+    image: "postgres"
     ports:
-      - "3306:3306"
-    volumes:
-      - ./database/Vocabulary.sql:/Vocabulary.sql:ro
+      - "5432:5432"
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test
+      - POSTGRES_PASSWORD=postgres

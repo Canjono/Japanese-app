@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize'
 
-const db = new Sequelize('Vocabulary', 'root', 'root', {
+const db = new Sequelize('Vocabulary', 'postgres', 'postgres', {
     host: 'database',
-    dialect: 'mysql',
+    dialect: 'postgres',
     operatorsAliases: false,
 
     pool: {
