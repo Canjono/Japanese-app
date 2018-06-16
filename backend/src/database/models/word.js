@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import db from '../db'
 
-const Word = db.define('word', {
+const word = db.define('word', {
     id: {
         type: Sequelize.STRING,
         primaryKey: true
@@ -17,7 +17,13 @@ const Word = db.define('word', {
     },
     story: {
         type: Sequelize.STRING
+    },
+    created: {
+        type: Sequelize.DATE
+    },
+    updated: {
+        type: Sequelize.DATE
     }
 })
 
-export default Word
+export default word

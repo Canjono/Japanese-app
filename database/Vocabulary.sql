@@ -22,16 +22,17 @@ DROP TABLE IF EXISTS `audit_trail`;
 CREATE TABLE IF NOT EXISTS `audit_trail` (
   `id` binary(16) NOT NULL,
   `message` varchar(120) NOT NULL,
-  `created_time` datetime NOT NULL DEFAULT current_timestamp(),
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table Vocabulary.audit_trail: ~8 rows (approximately)
 /*!40000 ALTER TABLE `audit_trail` DISABLE KEYS */;
-REPLACE INTO `audit_trail` (`id`, `message`, `created_time`) VALUES
+REPLACE INTO `audit_trail` (`id`, `message`, `created`) VALUES
 	(_binary 0x1E4AD8D75AE211E8BC680242AC110002, 'Word akai was created', '2018-05-18 21:26:25'),
 	(_binary 0x36AE96355AE111E8BC680242AC110002, '0', '2018-05-18 21:19:56'),
 	(_binary 0x3AD640805AE211E8BC680242AC110002, 'Word ohoy was created', '2018-05-18 21:27:13'),
+	(_binary 0x4CAC39E061EC11E8BED10242AC130002, 'Word Newword was created', '2018-05-27 20:26:56'),
 	(_binary 0x7988A18D5B9B11E884B40242AC110002, 'Word korosu was created', '2018-05-19 19:33:15'),
 	(_binary 0x960D09115AE211E8BC680242AC110002, 'User gamanno was created', '2018-05-18 21:29:46'),
 	(_binary 0xAD2D0EFD5AE111E8BC680242AC110002, 'Word was created', '2018-05-18 21:23:15'),
@@ -94,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `nickname` (`nickname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table Vocabulary.users: ~4 rows (approximately)
+-- Dumping data for table Vocabulary.users: ~5 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`id`, `nickname`, `password`, `enabled`, `created`) VALUES
 	(_binary 0x960B3F7E5AE211E8BC680242AC110002, 'gamanno', 'asecret', 1, '0000-00-00'),
@@ -129,8 +130,8 @@ CREATE TABLE IF NOT EXISTS `words` (
   `translation` varchar(45) DEFAULT NULL,
   `grammar` varchar(45) DEFAULT NULL,
   `story` longtext DEFAULT NULL,
-  `created_time` datetime NOT NULL,
-  `updated_time` datetime DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime DEFAULT NULL,
   `enabled` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `name` (`name`)
@@ -138,10 +139,11 @@ CREATE TABLE IF NOT EXISTS `words` (
 
 -- Dumping data for table Vocabulary.words: ~6 rows (approximately)
 /*!40000 ALTER TABLE `words` DISABLE KEYS */;
-REPLACE INTO `words` (`id`, `name`, `translation`, `grammar`, `story`, `created_time`, `updated_time`, `enabled`) VALUES
+REPLACE INTO `words` (`id`, `name`, `translation`, `grammar`, `story`, `created`, `updated`, `enabled`) VALUES
 	(_binary 0x1E4A0DEF5AE211E8BC680242AC110002, 'asd', 'hf', 'sdf', 'sdf sdf fd ', '2018-05-18 21:26:25', '2018-05-19 18:17:11', 0),
 	(_binary 0x36AD61C35AE111E8BC680242AC110002, 'konnichiwa', 'good day', 'other', 'Naruto says konnichiwa', '2018-05-18 21:19:56', '2018-05-19 19:46:21', 1),
 	(_binary 0x3AD524915AE211E8BC680242AC110002, 'ohoy', 'bright', 'adjective', 'some story thing', '2018-05-18 21:27:13', NULL, 1),
+	(_binary 0x4CAAC6A161EC11E8BED10242AC130002, 'Newword', 'trans', 'Verb', 'A story', '2018-05-27 20:26:56', NULL, 1),
 	(_binary 0x798672B25B9B11E884B40242AC110002, 'korosu', 'kill', 'verb', 'Gaara says korosu', '2018-05-19 19:33:15', NULL, 1),
 	(_binary 0x8EBB41895AE111E8BC680242AC110002, 'akarui', 'bright', 'adjective', 'some story thing', '2018-05-18 21:22:24', NULL, 1),
 	(_binary 0xAD2C41315AE111E8BC680242AC110002, 'akarui', 'bright', 'adjective', 'some story thing', '2018-05-18 21:23:15', NULL, 0);

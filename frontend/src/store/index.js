@@ -62,7 +62,7 @@ export default new Vuex.Store({
                 .query({
                     query: gql`
                         {
-                            words {
+                            getWordList {
                                 id
                                 name
                                 translation
@@ -73,7 +73,7 @@ export default new Vuex.Store({
                     `
                 })
                 .then(result => {
-                    context.commit('GET_WORDS', result.data.words)
+                    context.commit('GET_WORDS', result.data.getWordList)
                 })
                 .catch(err => {
                     console.error(err)

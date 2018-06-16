@@ -23,6 +23,14 @@ const wordType = new GraphQLObjectType({
         story: {
             type: GraphQLString,
             description: 'The story of the word'
+        },
+        created: {
+            type: GraphQLString,
+            description: 'Date when the word was created'
+        },
+        updated: {
+            type: GraphQLString,
+            description: 'Date when the word was last created'
         }
     }
 })
