@@ -3,7 +3,7 @@ import db from '../db'
 
 const word = db.define('word', {
     id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         primaryKey: true
     },
     name: {
@@ -18,10 +18,10 @@ const word = db.define('word', {
     story: {
         type: Sequelize.STRING
     },
-    created: {
+    createdAt: {
         type: Sequelize.DATE
     },
-    updated: {
+    updatedAt: {
         type: Sequelize.DATE
     }
 })
