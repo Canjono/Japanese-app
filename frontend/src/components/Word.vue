@@ -56,6 +56,7 @@
             </b-form-textarea>
         </b-form-group>
         <b-button type="submit" variant="secondary">Update</b-button>
+        <b-button type="submit" variant="secondary">Delete</b-button>
         </b-form>
     </div>
 </template>

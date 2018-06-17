@@ -1,7 +1,9 @@
 <template>
   <div class="Vocabulary">
     <b-img width="320" height="207" center src="../assets/logo.png" alt="center image" />
-    <button v-on:click="getWords">Get all words</button>
+    <b-btn v-on:click="getWords">Get all words</b-btn>
+    <b-btn v-b-modal.createWordModal>New word</b-btn>
+    <CreateWord />
     <h1>{{ title }}</h1>
     <b-container class="word-container">
         <b-row>
@@ -16,6 +18,7 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Word from '@/components/Word.vue'
+import CreateWord from '@/components/CreateWord.vue'
 
 export default {
     name: 'Vocabulary',
@@ -25,7 +28,8 @@ export default {
         }
     },
     components: {
-        Word
+        Word,
+        CreateWord
     },
     computed: {
         ...mapState(['words']),
