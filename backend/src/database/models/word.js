@@ -23,6 +23,9 @@ const word = db.define('word', {
     },
     updatedAt: {
         type: Sequelize.DATE
+    },
+    enabled: {
+        type: Sequelize.BOOLEAN
     }
 })
 

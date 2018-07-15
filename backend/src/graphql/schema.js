@@ -8,6 +8,7 @@ import {
 } from 'graphql'
 import wordType from './types/wordType'
 import Word from '../database/models/word'
+import uuid from 'uuid'
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -48,10 +49,30 @@ const schema = new GraphQLSchema({
                     name: {
                         description: 'Name of the word',
                         type: new GraphQLNonNull(GraphQLString)
+                    },
+                    translation: {
+                        description: 'Translation of the word',
+                        type: new GraphQLNonNull(GraphQLString)
+                    },
+                    grammar: {
+                        description: 'Grammar of the word',
+                        type: new GraphQLNonNull(GraphQLString)
+                    },
+                    story: {
+                        description: 'Story of the word',
+                        type: new GraphQLNonNull(GraphQLString)
                     }
                 },
                 resolve: (obj, args) => {
-                    return Word.create(args)
+                    return Word.create({
+                        id: uuid(),
+                        name: args.name,
+                        translation: args.translation,
+                        grammar: args.grammar,
+                        story: args.story,
+                        createdAt: Date.now(),
+                        updatedAt: Date.now()
+                    })
                 }
             },
             updateWord: {
@@ -82,6 +103,20 @@ const schema = new GraphQLSchema({
                     const id = args.id
                     delete args.id
                     return word.update(args, { where: { id } })
+                }
+            },
+            deleteWord: {
+                type: wordType,
+                args: {
+                    id: {
+                        description: 'Uuid of the word',
+                        type: new GraphQLNonNull(GraphQLString)
+                    }
+                },
+                resolve: (obj, args) => {
+                    const id = args.id
+                    delete args.id
+                    return Word.update({ enabled: false }, { where: { id } })
                 }
             }
         }
