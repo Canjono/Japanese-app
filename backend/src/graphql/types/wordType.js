@@ -24,11 +24,11 @@ const wordType = new GraphQLObjectType({
             type: GraphQLString,
             description: 'The story of the word'
         },
-        created: {
+        createdAt: {
             type: GraphQLString,
             description: 'Date when the word was created'
         },
-        updated: {
+        updatedAt: {
             type: GraphQLString,
             description: 'Date when the word was last created'
         }

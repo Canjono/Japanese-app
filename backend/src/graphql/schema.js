@@ -28,10 +28,8 @@ const schema = new GraphQLSchema({
                 resolve: (obj, args) => {
                     const offset = args.offset || 0
                     const limit = args.limit || 100
-                    delete args.offset
-                    delete args.limit
                     return Word.findAll({
-                        where: args,
+                        where: { enabled: true },
                         offset,
                         limit,
                         attributes: { exclude: ['enabled'] }
@@ -76,7 +74,7 @@ const schema = new GraphQLSchema({
                 }
             },
             updateWord: {
-                type: wordType,
+                type: GraphQLInt,
                 args: {
                     id: {
                         description: 'Uuid of the word',
@@ -101,12 +99,14 @@ const schema = new GraphQLSchema({
                 },
                 resolve: (obj, args) => {
                     const id = args.id
-                    delete args.id
-                    return word.update(args, { where: { id } })
+                    const params = args
+                    delete params.id
+                    params.updatedAt = Date.now()
+                    return Word.update(params, { where: { id } })
                 }
             },
             deleteWord: {
-                type: wordType,
+                type: GraphQLInt,
                 args: {
                     id: {
                         description: 'Uuid of the word',
@@ -115,7 +115,6 @@ const schema = new GraphQLSchema({
                 },
                 resolve: (obj, args) => {
                     const id = args.id
-                    delete args.id
                     return Word.update({ enabled: false }, { where: { id } })
                 }
             }
