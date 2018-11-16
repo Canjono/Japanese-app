@@ -27,6 +27,9 @@ export default {
             title: 'Vocabulary'
         }
     },
+    mounted() {
+        this.getWords()
+    },
     components: {
         Word,
         CreateWord

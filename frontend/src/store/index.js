@@ -8,29 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         appTitle: 'Japanese App',
-        words: [
-            {
-                id: '12345',
-                name: 'Amai',
-                translation: 'Sweet',
-                grammar: 'Adjective',
-                story: 'A story about sweet and amai'
-            },
-            {
-                id: '34567',
-                name: 'Kuruma',
-                translation: 'Car',
-                grammar: 'Noun',
-                story: 'A story about kuruma and car'
-            },
-            {
-                id: '56789',
-                name: 'Korosu',
-                translation: 'Kill',
-                grammar: 'Verb',
-                story: 'A story about korosu and kill'
-            }
-        ]
+        words: []
     },
     getters: {
         countWords: state => {
@@ -76,7 +54,7 @@ export default new Vuex.Store({
                     context.commit('GET_WORDS', result.data.getWordList)
                 })
                 .catch(err => {
-                    console.error(err)
+                    console.error(`getWords error: ${err}`)
                 })
         },
         updateWord: (context, word) => {
