@@ -9,7 +9,7 @@
             <b-form-input
                 id="nameInput"
                 type="text"
-                v-model="name"
+                v-model="word.name"
                 required
                 placeholder="Enter name"
             >
@@ -23,7 +23,7 @@
             <b-form-input
                 id="translationInput"
                 type="text"
-                v-model="translation"
+                v-model="word.translation"
                 required
                 placeholder="Enter translation"
             >
@@ -37,7 +37,7 @@
             <b-form-input
                 id="grammarInput"
                 type="text"
-                v-model="grammar"
+                v-model="word.grammar"
                 placeholder="Enter grammar"
             >
             </b-form-input>
@@ -49,7 +49,7 @@
         >
             <b-form-textarea
                 id="storyInput"
-                v-model="story"
+                v-model="word.story"
                 placeholder="Enter story"
                 :rows="5"
             >
@@ -69,62 +69,11 @@ export default {
     props: {
         word: Object
     },
-    computed: {
-        name: {
-            get() {
-                return this.word.name
-            },
-            set(value) {
-                const newWord = {
-                    ...this.word,
-                    name: value
-                }
-                this.updateWordProperty(newWord)
-            }
-        },
-        translation: {
-            get() {
-                return this.word.translation
-            },
-            set(value) {
-                const newWord = {
-                    ...this.word,
-                    translation: value
-                }
-                this.updateWordProperty(newWord)
-            }
-        },
-        grammar: {
-            get() {
-                return this.word.grammar
-            },
-            set(value) {
-                const newWord = {
-                    ...this.word,
-                    grammar: value
-                }
-                this.updateWordProperty(newWord)
-            }
-        },
-        story: {
-            get() {
-                return this.word.story
-            },
-            set(value) {
-                const newWord = {
-                    ...this.word,
-                    story: value
-                }
-                this.updateWordProperty(newWord)
-            }
-        }
-    },
     methods: {
-        ...mapActions(['updateWordProperty']),
+        ...mapActions(['updateWord']),
         onSubmit(evt) {
             evt.preventDefault()
-            console.log(`${this.word.name} was updated`)
-            alert(`${this.word.name} was updated`)
+            this.updateWord(this.word)
         },
         onReset(evt) {
             evt.preventDefault()

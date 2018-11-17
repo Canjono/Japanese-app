@@ -27,9 +27,10 @@ export default {
             title: 'Vocabulary'
         }
     },
-    mounted() {
+    created() {
         this.getWords()
     },
+    apollo: {},
     components: {
         Word,
         AddWord

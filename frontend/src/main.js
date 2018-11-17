@@ -18,7 +18,7 @@ new Vue({
     el: '#app',
     router,
     store,
+    apolloProvider,
     components: { App },
-    template: '<App/>',
-    provide: apolloProvider.provide()
+    template: '<App/>'
 })

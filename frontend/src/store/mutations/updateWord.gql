@@ -1,0 +1,3 @@
+mutation updateWord ($id: String!, $name: String!, $translation: String!, $grammar: String!, $story: String!) {
+    updateWord(id: $id, name: $name, translation: $translation, grammar: $grammar, story: $story)
+}
