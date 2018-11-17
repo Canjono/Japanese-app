@@ -1,6 +1,6 @@
 import { GraphQLSchema, GraphQLObjectType } from 'graphql'
 import getWordList from './queries/getWordList'
-import createWord from './mutations/createWord'
+import addWord from './mutations/addWord'
 import updateWord from './mutations/updateWord'
 import deleteWord from './mutations/deleteWord'
 
@@ -14,7 +14,7 @@ const schema = new GraphQLSchema({
     mutation: new GraphQLObjectType({
         name: 'Mutation',
         fields: {
-            createWord,
+            addWord,
             updateWord,
             deleteWord
         }

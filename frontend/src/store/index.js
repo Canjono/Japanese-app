@@ -30,11 +30,47 @@ export default new Vuex.Store({
             state.words = words
         }
     },
+    apollo: {},
     actions: {
         addWord: (context, word) => {
-            context.commit('ADD_WORD', word)
+            apolloClient
+                .mutate({
+                    mutation: gql`
+                        mutation(
+                            $name: String!
+                            $translation: String!
+                            $grammar: String!
+                            $story: String!
+                        ) {
+                            addWord(
+                                name: $name
+                                translation: $translation
+                                grammar: $grammar
+                                story: $story
+                            ) {
+                                id
+                                name
+                                translation
+                                grammar
+                                story
+                            }
+                        }
+                    `,
+                    variables: {
+                        name: word.name,
+                        translation: word.translation,
+                        grammar: word.grammar,
+                        story: word.story
+                    }
+                })
+                .then(result => {
+                    console.log('Added word: ' + result.data.addWord)
+                    context.commit('ADD_WORD', result.data.addWord)
+                })
+                .catch(err => {
+                    console.error(`getWords error: ${err}`)
+                })
         },
-        // Example of how to use a promise when getting words.
         getWords(context) {
             apolloClient
                 .query({

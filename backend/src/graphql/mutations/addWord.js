@@ -3,7 +3,7 @@ import Word from '../../database/models/word'
 import wordType from '../types/wordType'
 import uuid from 'uuid'
 
-const createWord = {
+const addWord = {
     type: wordType,
     args: {
         name: {
@@ -36,4 +36,4 @@ const createWord = {
     }
 }
 
-export default createWord
+export default addWord

@@ -56,7 +56,7 @@
             </b-form-textarea>
         </b-form-group>
         <b-button type="submit" variant="secondary">Update</b-button>
-        <b-button type="submit" variant="secondary">Delete</b-button>
+        <b-button type="reset" variant="secondary" @click="onReset">Delete</b-button>
         </b-form>
     </div>
 </template>
@@ -123,7 +123,12 @@ export default {
         ...mapActions(['updateWordProperty']),
         onSubmit(evt) {
             evt.preventDefault()
+            console.log(`${this.word.name} was updated`)
             alert(`${this.word.name} was updated`)
+        },
+        onReset(evt) {
+            evt.preventDefault()
+            console.log('deleting')
         }
     }
 }
