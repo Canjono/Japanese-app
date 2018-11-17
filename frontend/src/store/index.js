@@ -4,6 +4,7 @@ import apolloClient from '@/ApolloClient'
 import ADD_WORD from './mutations/addWord.gql'
 import GET_WORD_LIST from './queries/getWordList.gql'
 import UPDATE_WORD from './mutations/updateWord.gql'
+import DELETE_WORD from './mutations/deleteWord.gql'
 
 Vue.use(Vuex)
 
@@ -29,6 +30,12 @@ export default new Vuex.Store({
                 return x.id === word.id ? word : x
             })
             state.words = words
+        },
+        DELETE_WORD: (state, id) => {
+            const words = state.words.filter(x => {
+                return x.id !== id
+            })
+            state.words = words
         }
     },
     actions: {
@@ -44,7 +51,7 @@ export default new Vuex.Store({
                     }
                 })
                 .then(result => {
-                    console.log('Added word: ' + result.data.addWord)
+                    console.log(`Added word result: ${result.data.addWord}`)
                     context.commit('ADD_WORD', result.data.addWord)
                 })
                 .catch(err => {
@@ -76,12 +83,32 @@ export default new Vuex.Store({
                     }
                 })
                 .then(result => {
-                    console.log('Updated word: ' + result.data.updateWord)
+                    console.log(
+                        `Updated word result: ${result.data.updateWord}`
+                    )
                     context.commit('UPDATE_WORD', result.data.updateWord)
-                    alert(`${result.data.updateWord.name} was updated`)
+                    alert(`${word.name} was updated`)
                 })
                 .catch(err => {
                     console.error(`updateWord error: ${err}`)
+                })
+        },
+        deleteWord: (context, id) => {
+            apolloClient
+                .mutate({
+                    mutation: DELETE_WORD,
+                    variables: {
+                        id: id
+                    }
+                })
+                .then(result => {
+                    console.log(
+                        `Deleted word result: ${result.data.deleteWord}`
+                    )
+                    context.commit('DELETE_WORD', id)
+                })
+                .catch(err => {
+                    console.error(`deleteWord error: ${err}`)
                 })
         }
     }

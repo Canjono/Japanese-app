@@ -56,7 +56,7 @@
             </b-form-textarea>
         </b-form-group>
         <b-button type="submit" variant="secondary">Update</b-button>
-        <b-button type="reset" variant="secondary" @click="onReset">Delete</b-button>
+        <b-button type="button" variant="secondary" @click="onDeleteClick">Delete</b-button>
         </b-form>
     </div>
 </template>
@@ -70,14 +70,13 @@ export default {
         word: Object
     },
     methods: {
-        ...mapActions(['updateWord']),
+        ...mapActions(['updateWord', 'deleteWord']),
         onSubmit(evt) {
             evt.preventDefault()
             this.updateWord(this.word)
         },
-        onReset(evt) {
-            evt.preventDefault()
-            console.log('deleting')
+        onDeleteClick(evt) {
+            this.deleteWord(this.word.id)
         }
     }
 }
