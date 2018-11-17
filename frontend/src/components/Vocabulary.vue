@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Word from '@/components/Word.vue'
 import AddWord from '@/components/AddWord.vue'
 
@@ -36,15 +36,10 @@ export default {
         AddWord
     },
     computed: {
-        ...mapState(['words']),
-        ...mapGetters(['countWords'])
+        ...mapState(['words'])
     },
     methods: {
-        ...mapMutations(['ADD_WORD']),
-        ...mapActions(['addWord', 'getWords']),
-        addNewWord: function(word) {
-            this.addWord(word)
-        }
+        ...mapActions(['getWords'])
     }
 }
 </script>

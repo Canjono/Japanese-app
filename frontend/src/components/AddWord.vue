@@ -56,8 +56,6 @@
                     >
                     </b-form-textarea>
                 </b-form-group>
-                <!-- <b-button type="reset" variant="secondary">Reset</b-button>
-                <b-button type="submit" variant="primary">Add</b-button> -->
                 <b-container class="add-or-reset">
                     <b-row align-h="end">
                         <b-col cols="2">
