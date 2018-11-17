@@ -1,0 +1,9 @@
+mutation addWord ($name: String!, $translation: String!, $grammar: String!, $story: String!) {
+    addWord(name: $name, translation: $translation, grammar: $grammar, story: $story) {
+        id
+        name
+        translation
+        grammar
+        story
+    }
+}

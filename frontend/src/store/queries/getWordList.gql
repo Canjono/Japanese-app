@@ -1,0 +1,9 @@
+query getWordList {
+    getWordList {
+        id
+        name
+        translation
+        grammar
+        story
+    }
+}
