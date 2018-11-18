@@ -30,10 +30,10 @@ export default {
         memoryPalace: Object
     },
     methods: {
-        ...mapActions(['deleteMemoryPalace']),
+        ...mapActions(['updateMemoryPalace', 'deleteMemoryPalace']),
         onSubmit(evt) {
             evt.preventDefault()
-            console.log('Updating')
+            this.updateMemoryPalace(this.memoryPalace)
         },
         onDeletePalace(evt) {
             this.deleteMemoryPalace(this.memoryPalace.id)

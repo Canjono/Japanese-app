@@ -6,6 +6,7 @@ import deleteWord from './mutations/deleteWord'
 import getMemoryPalaces from './queries/getMemoryPalaces'
 import addMemoryPalace from './mutations/addMemoryPalace'
 import deleteMemoryPalace from './mutations/deleteMemoryPalace'
+import updateMemoryPalace from './mutations/updateMemoryPalace'
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -22,7 +23,8 @@ const schema = new GraphQLSchema({
             updateWord,
             deleteWord,
             addMemoryPalace,
-            deleteMemoryPalace
+            deleteMemoryPalace,
+            updateMemoryPalace
         }
     })
 })

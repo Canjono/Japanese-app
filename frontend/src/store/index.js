@@ -7,6 +7,7 @@ import deleteWordAction from './actions/deleteWord'
 import getMemoryPalacesAction from './actions/getMemoryPalaces'
 import addMemoryPalaceAction from './actions/addMemoryPalace'
 import deleteMemoryPalaceAction from './actions/deleteMemoryPalace'
+import updateMemoryPalaceAction from './actions/updateMemoryPalace'
 
 Vue.use(Vuex)
 
@@ -51,6 +52,12 @@ export default new Vuex.Store({
                 return x.id !== id
             })
             state.memoryPalaces = memoryPalaces
+        },
+        UPDATE_MEMORY_PALACE: (state, memoryPalace) => {
+            const memoryPalaces = state.memoryPalaces.map(x => {
+                return x.id === memoryPalace.id ? memoryPalace : x
+            })
+            state.memoryPalaces = memoryPalaces
         }
     },
     actions: {
@@ -58,10 +65,13 @@ export default new Vuex.Store({
         getWords: context => getWordsAction(context),
         updateWord: (context, word) => updateWordAction(context, word),
         deleteWord: (context, id) => deleteWordAction(context, id),
+
         getMemoryPalaces: context => getMemoryPalacesAction(context),
         addMemoryPalace: (context, memoryPalace) =>
             addMemoryPalaceAction(context, memoryPalace),
         deleteMemoryPalace: (context, id) =>
-            deleteMemoryPalaceAction(context, id)
+            deleteMemoryPalaceAction(context, id),
+        updateMemoryPalace: (context, memoryPalace) =>
+            updateMemoryPalaceAction(context, memoryPalace)
     }
 })
