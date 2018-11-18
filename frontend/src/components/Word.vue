@@ -56,7 +56,7 @@
             </b-form-textarea>
         </b-form-group>
         <b-button type="submit" variant="secondary">Update</b-button>
-        <b-button type="button" variant="secondary" @click="onDeleteClick">Delete</b-button>
+        <b-button type="button" variant="secondary" @click="onDeleteWord">Delete</b-button>
         </b-form>
     </div>
 </template>
@@ -75,9 +75,13 @@ export default {
             evt.preventDefault()
             this.updateWord(this.word)
         },
-        onDeleteClick(evt) {
+        onDeleteWord(evt) {
             this.deleteWord(this.word.id)
         }
     }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>

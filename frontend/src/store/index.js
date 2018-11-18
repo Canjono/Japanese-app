@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import apolloClient from '@/ApolloClient'
 import ADD_WORD from './mutations/addWord.gql'
-import GET_WORD_LIST from './queries/getWordList.gql'
+import GET_WORDS from './queries/getWords.gql'
 import UPDATE_WORD from './mutations/updateWord.gql'
 import DELETE_WORD from './mutations/deleteWord.gql'
 
@@ -51,8 +51,18 @@ export default new Vuex.Store({
                     }
                 })
                 .then(result => {
-                    console.log(`Added word result: ${result.data.addWord}`)
-                    context.commit('ADD_WORD', result.data.addWord)
+                    console.log(
+                        `Added word result: ${JSON.stringify(
+                            result,
+                            null,
+                            2
+                        )}`
+                    )
+                    if (result.data.addWord.__typename === 'Word') {
+                        context.commit('ADD_WORD', result.data.addWord)
+                    } else {
+                        console.error('Word was not added')
+                    }
                 })
                 .catch(err => {
                     console.error(`addWord error: ${err}`)
@@ -61,10 +71,13 @@ export default new Vuex.Store({
         getWords(context) {
             apolloClient
                 .query({
-                    query: GET_WORD_LIST
+                    query: GET_WORDS
                 })
                 .then(result => {
-                    context.commit('GET_WORDS', result.data.getWordList)
+                    console.log(
+                        `getWords result: ${JSON.stringify(result, null, 2)}`
+                    )
+                    context.commit('GET_WORDS', result.data.getWords)
                 })
                 .catch(err => {
                     console.error(`getWords error: ${err}`)
@@ -84,10 +97,18 @@ export default new Vuex.Store({
                 })
                 .then(result => {
                     console.log(
-                        `Updated word result: ${result.data.updateWord}`
+                        `Updated word result: ${JSON.stringify(
+                            result,
+                            null,
+                            2
+                        )}`
                     )
-                    context.commit('UPDATE_WORD', result.data.updateWord)
-                    alert(`${word.name} was updated`)
+                    if (result.data.updateWord === 1) {
+                        context.commit('UPDATE_WORD', result.data.updateWord)
+                        alert(`${word.name} was updated`)
+                    } else {
+                        console.error('Word was not updated')
+                    }
                 })
                 .catch(err => {
                     console.error(`updateWord error: ${err}`)
@@ -103,9 +124,17 @@ export default new Vuex.Store({
                 })
                 .then(result => {
                     console.log(
-                        `Deleted word result: ${result.data.deleteWord}`
+                        `Deleted word result: ${JSON.stringify(
+                            result,
+                            null,
+                            2
+                        )}`
                     )
-                    context.commit('DELETE_WORD', id)
+                    if (result.data.deleteWord === 1) {
+                        context.commit('DELETE_WORD', id)
+                    } else {
+                        console.error('Word was not deleted')
+                    }
                 })
                 .catch(err => {
                     console.error(`deleteWord error: ${err}`)

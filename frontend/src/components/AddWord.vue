@@ -90,7 +90,6 @@ export default {
         ...mapActions(['addWord']),
         onSubmit(evt) {
             evt.preventDefault()
-            console.log(`${this.word.name} was added`)
             this.addWord(this.word)
         },
         onReset(evt) {

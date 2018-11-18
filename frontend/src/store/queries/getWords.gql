@@ -1,5 +1,5 @@
-query getWordList {
-    getWordList {
+query getWords {
+    getWords {
         id
         name
         translation

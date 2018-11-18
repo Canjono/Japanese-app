@@ -2,7 +2,7 @@ import { GraphQLList, GraphQLInt } from 'graphql'
 import Word from '../../database/models/word'
 import wordType from '../types/wordType'
 
-const getWordList = {
+const getWords = {
     type: new GraphQLList(wordType),
     args: {
         limit: {
@@ -25,4 +25,4 @@ const getWordList = {
     }
 }
 
-export default getWordList
+export default getWords
