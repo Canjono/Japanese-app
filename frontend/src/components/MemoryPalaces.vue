@@ -6,8 +6,8 @@
     <h1>{{ title }}</h1>
     <b-container class="memory-palace-container">
         <b-row>
-            <b-col sm="6" md="4" v-for="(palace, index) in memoryPalaces" v-bind:key="index">
-                <Palace v-bind:memoryPalace="palace"></Palace>
+            <b-col sm="6" md="4" v-for="(memoryPalace, index) in memoryPalaces" v-bind:key="index">
+                <MemoryPalace v-bind:memoryPalace="memoryPalace"></MemoryPalace>
             </b-col>
         </b-row>
     </b-container>
@@ -17,7 +17,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import AddMemoryPalace from '@/components/AddMemoryPalace.vue'
-import Palace from '@/components/Palace.vue'
+import MemoryPalace from '@/components/MemoryPalace.vue'
 
 export default {
     name: 'MemoryPalaces',
@@ -29,8 +29,7 @@ export default {
     created() {
         this.getMemoryPalaces()
     },
-    apollo: {},
-    components: { Palace, AddMemoryPalace },
+    components: { MemoryPalace, AddMemoryPalace },
     computed: {
         ...mapState(['memoryPalaces'])
     },

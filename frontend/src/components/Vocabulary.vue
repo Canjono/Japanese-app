@@ -29,7 +29,6 @@ export default {
     created() {
         this.getWords()
     },
-    apollo: {},
     components: {
         Word,
         AddWord

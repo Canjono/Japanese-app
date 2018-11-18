@@ -1,0 +1,3 @@
+mutation deleteMemoryPalace($id: String!) {
+    deleteMemoryPalace(id: $id)
+}
