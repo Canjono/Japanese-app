@@ -1,0 +1,8 @@
+mutation addMemoryPalace ($name: String!) {
+    addMemoryPalace(name: $name) {
+        id
+        name
+        createdAt
+        updatedAt
+    }
+}

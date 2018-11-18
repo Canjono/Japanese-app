@@ -1,0 +1,8 @@
+query getMemoryPalaces {
+    getMemoryPalaces {
+        id
+        name
+        createdAt
+        updatedAt
+    }
+}

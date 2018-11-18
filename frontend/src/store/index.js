@@ -5,13 +5,16 @@ import ADD_WORD from './mutations/addWord.gql'
 import GET_WORDS from './queries/getWords.gql'
 import UPDATE_WORD from './mutations/updateWord.gql'
 import DELETE_WORD from './mutations/deleteWord.gql'
+import GET_MEMORY_PALACES from './queries/getMemoryPalaces.gql'
+import ADD_MEMORY_PALACE from './mutations/addMemoryPalace.gql'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
         appTitle: 'Japanese App',
-        words: []
+        words: [],
+        memoryPalaces: []
     },
     getters: {
         countWords: state => {
@@ -36,6 +39,12 @@ export default new Vuex.Store({
                 return x.id !== id
             })
             state.words = words
+        },
+        GET_MEMORY_PALACES: (state, memoryPalaces) => {
+            state.memoryPalaces = memoryPalaces
+        },
+        ADD_MEMORY_PALACE: (state, memoryPalace) => {
+            state.memoryPalaces.push(memoryPalace)
         }
     },
     actions: {
@@ -138,6 +147,60 @@ export default new Vuex.Store({
                 })
                 .catch(err => {
                     console.error(`deleteWord error: ${err}`)
+                })
+        },
+        getMemoryPalaces(context) {
+            apolloClient
+                .query({
+                    query: GET_MEMORY_PALACES
+                })
+                .then(result => {
+                    console.log(
+                        `getMemoryPalaces result: ${JSON.stringify(
+                            result,
+                            null,
+                            2
+                        )}`
+                    )
+                    context.commit(
+                        'GET_MEMORY_PALACES',
+                        result.data.getMemoryPalaces
+                    )
+                })
+                .catch(err => {
+                    console.error(`getMemoryPalaces error: ${err}`)
+                })
+        },
+        addMemoryPalace: (context, memoryPalace) => {
+            apolloClient
+                .mutate({
+                    mutation: ADD_MEMORY_PALACE,
+                    variables: {
+                        name: memoryPalace.name
+                    }
+                })
+                .then(result => {
+                    console.log(
+                        `Added memory palace result: ${JSON.stringify(
+                            result,
+                            null,
+                            2
+                        )}`
+                    )
+                    if (
+                        result.data.addMemoryPalace.__typename ===
+                        'MemoryPalace'
+                    ) {
+                        context.commit(
+                            'ADD_MEMORY_PALACE',
+                            result.data.addMemoryPalace
+                        )
+                    } else {
+                        console.error('Memory palace was not added')
+                    }
+                })
+                .catch(err => {
+                    console.error(`addMemoryPalace error: ${err}`)
                 })
         }
     }

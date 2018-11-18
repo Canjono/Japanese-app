@@ -9,7 +9,7 @@
             <b-form-input
                 id="nameInput"
                 type="text"
-                v-model="palace.rooms[0]"
+                v-model="memoryPalace.name"
                 required
                 placeholder="Enter name"
             >
@@ -24,7 +24,7 @@
 export default {
     name: 'Palace',
     props: {
-        palace: Object
+        memoryPalace: Object
     },
     methods: {
         onSubmit(evt) {

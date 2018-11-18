@@ -4,6 +4,7 @@ import addWord from './mutations/addWord'
 import updateWord from './mutations/updateWord'
 import deleteWord from './mutations/deleteWord'
 import getMemoryPalaces from './queries/getMemoryPalaces'
+import addMemoryPalace from './mutations/addMemoryPalace'
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -18,7 +19,8 @@ const schema = new GraphQLSchema({
         fields: {
             addWord,
             updateWord,
-            deleteWord
+            deleteWord,
+            addMemoryPalace
         }
     })
 })

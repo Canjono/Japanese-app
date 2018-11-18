@@ -1,12 +1,13 @@
 <template>
   <div class="memory-palaces">
     <b-img width="320" height="207" center src="../assets/logo.png" alt="center image" />
-    <b-btn v-b-modal.addMemoryPalaceModal>New memory palace</b-btn>
+    <b-btn v-b-modal.addMemoryPalaceModal>Add memory palace</b-btn>
+    <AddMemoryPalace />
     <h1>{{ title }}</h1>
     <b-container class="memory-palace-container">
         <b-row>
             <b-col sm="6" md="4" v-for="(palace, index) in memoryPalaces" v-bind:key="index">
-                <Palace v-bind:palace="palace"></Palace>
+                <Palace v-bind:memoryPalace="palace"></Palace>
             </b-col>
         </b-row>
     </b-container>
@@ -14,24 +15,28 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import AddMemoryPalace from '@/components/AddMemoryPalace.vue'
 import Palace from '@/components/Palace.vue'
 
 export default {
     name: 'MemoryPalaces',
     data() {
         return {
-            title: 'Memory Palaces',
-            memoryPalaces: [
-                { rooms: ['room1', 'room2'] },
-                { rooms: ['kitchen', 'living room'] }
-            ]
+            title: 'Memory Palaces'
         }
     },
-    created() {},
+    created() {
+        this.getMemoryPalaces()
+    },
     apollo: {},
-    components: { Palace },
-    computed: {},
-    methods: {}
+    components: { Palace, AddMemoryPalace },
+    computed: {
+        ...mapState(['memoryPalaces'])
+    },
+    methods: {
+        ...mapActions(['getMemoryPalaces'])
+    }
 }
 </script>
 

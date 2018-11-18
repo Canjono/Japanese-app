@@ -5,5 +5,7 @@ query getWords {
         translation
         grammar
         story
+        createdAt
+        updatedAt
     }
 }
